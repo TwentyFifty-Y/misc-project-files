@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/TwentyFifty-Y/misc-project-files/issues"
   },
-  "homepage": "https://github.com/TwentyFifty-Y/misc-project-files#readme"
+  "homepage": "https://github.com/TwentyFifty-Y/misc-project-files#readme",
+  "dependencies": {
+    "axios": "^1.1.3"
+  }
 }
