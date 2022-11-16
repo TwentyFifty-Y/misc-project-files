@@ -2,12 +2,12 @@ const AWS = require("aws-sdk");
 const dbb = new AWS.DynamoDB.DocumentClient({ region: "eu-central-1" });
 
 exports.handler = async (event, context, callback) => {
-    const view1GlobalMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.monthly.csv");
-    const view1GlobalAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv");
-    const view1NorthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.monthly.csv");
-    const view1NorthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.annual.csv");
-    const view1SouthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.monthly.csv");
-    const view1SouthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.annual.csv");
+    const view1GlobalMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.monthly.csv", "csv");
+    const view1GlobalAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv", "csv");
+    const view1NorthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.monthly.csv", "csv");
+    const view1NorthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.annual.csv", "csv");
+    const view1SouthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.monthly.csv", "csv");
+    const view1SouthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.annual.csv", "csv");
 
     const dataArray = [
         {
@@ -132,7 +132,7 @@ function tsvJSON(tsv, firstLine) {
 }
 
 //Read file from link and save it locally
-function saveData(link) {
+function saveData(link, format) {
 
     const LINK = link;
 
@@ -154,8 +154,17 @@ function saveData(link) {
                 // Read local csv file
                 var csv = fs.readFileSync('/tmp/data.csv', 'utf8');
 
-                // Convert csv to json
-                var json = csvJSON(csv);
+                // Check specified format
+                if (format == "csv") {
+                    //Convert CSV to JSON
+                    var json = csvJSON(csv);
+                } else if (format == "tsv") {
+                    //Convert TSV to JSON
+                    var json = tsvJSON(csv);
+                } else {
+                    console.log("Error: No format specified");
+                    var json = csvJSON(csv);
+                }
 
                 resolve(json);
             });
