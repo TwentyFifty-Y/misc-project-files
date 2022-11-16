@@ -8,6 +8,7 @@ exports.handler = async (event, context, callback) => {
     const view1NorthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.annual.csv", "csv");
     const view1SouthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.monthly.csv", "csv");
     const view1SouthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.annual.csv", "csv");
+    const view2Main = await saveData("https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt", "ssv", 92)
 
     const dataArray = [
         {
@@ -55,6 +56,14 @@ exports.handler = async (event, context, callback) => {
                 Item: {
                     view_id: "view1SouthAnnual",
                     info: view1SouthAnnual
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view2Main",
+                    info: view2Main
                 },
             },
         },
@@ -131,8 +140,37 @@ function tsvJSON(tsv, firstLine) {
     return JSON.stringify(result); //JSON
 }
 
+function ssvJSON(ssv, firstLine) {
+
+    if (!firstLine) {
+        firstLine = 0;
+    }
+
+    var lines = ssv.split("\n");
+
+    var result = [];
+
+    var headers = ['time', 'anomaly'];
+
+    for (var i = (firstLine + 1); i < lines.length; i++) {
+
+        var obj = {};
+        var currentline = lines[i].trimStart().split("   ");
+
+        for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+        }
+
+        result.push(obj);
+
+    }
+
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+}
+
 //Read file from link and save it locally
-function saveData(link, format) {
+function saveData(link, format, firstLine) {
 
     const LINK = link;
 
@@ -155,15 +193,21 @@ function saveData(link, format) {
                 var localFile = fs.readFileSync('/tmp/data.txt', 'utf8');
 
                 // Check specified format
-                if (format == "csv") {
-                    //Convert CSV to JSON
-                    var json = csvJSON(localFile);
-                } else if (format == "tsv") {
-                    //Convert TSV to JSON
-                    var json = tsvJSON(localFile);
-                } else {
-                    console.log("Error: No format specified");
-                    var json = csvJSON(localFile);
+                switch (format) {
+                    case "csv":
+                        var json = csvJSON(localFile, firstLine);
+                        break;
+
+                    case "tsv":
+                        var json = tsvJSON(localFile, firstLine);
+                        break;
+
+                    case "ssv":
+                        var json = ssvJSON(localFile, firstLine);
+                        break;
+
+                    default:
+                        break;
                 }
 
                 resolve(json);
