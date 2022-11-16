@@ -8,7 +8,7 @@ exports.handler = async (event, context, callback) => {
     const view1NorthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.annual.csv", ",");
     const view1SouthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.monthly.csv", ",");
     const view1SouthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.annual.csv", ",");
-    const view2Main = await saveData("https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt", "   ", 92)
+    const view2Main = await saveData("https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt", "   ", 92);
 
     const dataArray = [
         {
@@ -135,7 +135,7 @@ function saveData(link, delimiter, firstLine) {
                 var localFile = fs.readFileSync('/tmp/data.txt', 'utf8');
 
                 // Transform dsv to JSON
-                var json = dsvJSON(localFile, delimiter, firstLine)
+                var json = dsvJSON(localFile, delimiter, firstLine);
 
                 resolve(json);
             });
