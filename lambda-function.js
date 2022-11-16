@@ -143,7 +143,7 @@ function saveData(link, format) {
         const https = require('https');
 
         const request = https.get(LINK, function (response) {
-            const file = fs.createWriteStream("/tmp/data.csv");
+            const file = fs.createWriteStream("/tmp/data.txt");
             response.pipe(file);
 
             // after download completed close filestream
@@ -152,18 +152,18 @@ function saveData(link, format) {
                 console.log("Download Completed");
 
                 // Read local csv file
-                var csv = fs.readFileSync('/tmp/data.csv', 'utf8');
+                var localFile = fs.readFileSync('/tmp/data.txt', 'utf8');
 
                 // Check specified format
                 if (format == "csv") {
                     //Convert CSV to JSON
-                    var json = csvJSON(csv);
+                    var json = csvJSON(localFile);
                 } else if (format == "tsv") {
                     //Convert TSV to JSON
-                    var json = tsvJSON(csv);
+                    var json = tsvJSON(localFile);
                 } else {
                     console.log("Error: No format specified");
-                    var json = csvJSON(csv);
+                    var json = csvJSON(localFile);
                 }
 
                 resolve(json);
