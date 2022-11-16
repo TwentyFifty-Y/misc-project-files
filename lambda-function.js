@@ -8,7 +8,7 @@ exports.handler = async (event, context, callback) => {
     const view1NorthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.annual.csv");
     const view1SouthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.monthly.csv");
     const view1SouthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.annual.csv");
-    
+
     const dataArray = [
         {
             PutRequest: {
@@ -59,7 +59,7 @@ exports.handler = async (event, context, callback) => {
             },
         },
     ];
-    
+
     await sendInfo(dataArray).then(() => {
         callback(null, {
             statusCode: 201,
@@ -74,7 +74,7 @@ exports.handler = async (event, context, callback) => {
 };
 
 function csvJSON(csv, firstLine) {
-    
+
     if (!firstLine) {
         firstLine = 0;
     }
@@ -89,6 +89,35 @@ function csvJSON(csv, firstLine) {
 
         var obj = {};
         var currentline = lines[i].split(",");
+
+        for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+        }
+
+        result.push(obj);
+
+    }
+
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+}
+
+function tsvJSON(tsv, firstLine) {
+
+    if (!firstLine) {
+        firstLine = 0;
+    }
+
+    var lines = tsv.split("\n");
+
+    var result = [];
+
+    var headers = ['time', 'anomaly'];
+
+    for (var i = (firstLine + 1); i < lines.length; i++) {
+
+        var obj = {};
+        var currentline = lines[i].split("\t");
 
         for (var j = 0; j < headers.length; j++) {
             obj[headers[j]] = currentline[j];
