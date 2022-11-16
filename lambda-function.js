@@ -9,6 +9,8 @@ exports.handler = async (event, context, callback) => {
     const view1SouthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.monthly.csv", ",", ["time", "anomaly"]);
     const view1SouthAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.southern_hemisphere.annual.csv", ",", ["time", "anomaly"]);
     const view2Main = await saveData("https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt", "   ", ["time", "anomaly"], 92);
+    const view3Monthly = await saveData("https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv", ",", ["year", "month", "decimalDate", "mean"], 52);
+    const view3Annual = await saveData("https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.csv", ",", ["year", "mean"], 55);
 
     const dataArray = [
         {
@@ -64,6 +66,22 @@ exports.handler = async (event, context, callback) => {
                 Item: {
                     view_id: "view2Main",
                     info: view2Main
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view3Monthly",
+                    info: view3Monthly
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view3Annual",
+                    info: view3Annual
                 },
             },
         },
