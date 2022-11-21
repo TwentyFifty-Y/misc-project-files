@@ -3,7 +3,7 @@
 
 handler = async (event, context, callback) => {
     //The saveData function has the following parameters:
-    // saveData(link, delimiter, headers, firstLine)    firstLine is optional
+    // saveData(link, delimiter, headers, firstLine, lastLine)    firstLine and lastLine are optional
     const view1GlobalMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.monthly.csv", ",", ["time", "anomaly"]);
     const view1GlobalAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv", ",", ["time", "anomaly"]);
     const view1NorthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.monthly.csv", ",", ["time", "anomaly"]);
@@ -13,6 +13,10 @@ handler = async (event, context, callback) => {
     const view2Main = await saveData("https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt", "   ", ["time", "anomaly"], 92);
     const view3Monthly = await saveData("https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv", ",", ["year", "month", "decimalDate", "mean"], 52);
     const view3Annual = await saveData("https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.csv", ",", ["year", "mean"], 55);
+    const view4SampleOne = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 21, 54);
+    const view4SampleTwo = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 58, 70);
+    const view4SampleThree = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 74, 116);
+    const view5Main = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2", "\t", ["iceDepthMeters", "iceAgeYearBeforePresent", "airAgeYearBeforePresent", "co2ppm"], 20)
 
     const dataArray = [
         {
@@ -87,6 +91,38 @@ handler = async (event, context, callback) => {
                 },
             },
         },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view4SampleOne",
+                    info: view4SampleOne
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view4SampleTwo",
+                    info: view4SampleTwo
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view4SampleThree",
+                    info: view4SampleThree
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view5Main",
+                    info: view5Main
+                },
+            },
+        },
     ];
     console.log(dataArray);
     // await sendInfo(dataArray).then(() => {
@@ -102,17 +138,21 @@ handler = async (event, context, callback) => {
     // });
 }
 
-function dsvJSON(ssv, delimiter, headers, firstLine) {
+function dsvJSON(dsv, delimiter, headers, firstLine, lastLine) {
 
     if (!firstLine) {
         firstLine = 0;
     }
 
-    var lines = ssv.split("\n");
+    var lines = dsv.split("\n");
+
+    if (!lastLine) {
+        lastLine = lines.length;
+    }
 
     var result = [];
 
-    for (var i = (firstLine + 1); i < lines.length; i++) {
+    for (var i = (firstLine + 1); i < lastLine; i++) {
 
         var obj = {};
         var currentline = lines[i].trim().split(delimiter);
@@ -130,7 +170,7 @@ function dsvJSON(ssv, delimiter, headers, firstLine) {
 }
 
 //Read file from link and save it locally
-function saveData(link, delimiter, headers, firstLine) {
+function saveData(link, delimiter, headers, firstLine, lastLine) {
 
     const LINK = link;
 
@@ -153,7 +193,7 @@ function saveData(link, delimiter, headers, firstLine) {
                 var localFile = fs.readFileSync('data.txt', 'utf8');
 
                 // Transform dsv to JSON
-                var json = dsvJSON(localFile, delimiter, headers, firstLine);
+                var json = dsvJSON(localFile, delimiter, headers, firstLine, lastLine);
 
                 resolve(json);
             });
