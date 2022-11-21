@@ -2,6 +2,8 @@ const AWS = require("aws-sdk");
 const dbb = new AWS.DynamoDB.DocumentClient({ region: "eu-central-1" });
 
 exports.handler = async (event, context, callback) => {
+    //The saveData function has the following parameters:
+    // saveData(link, delimiter, headers, firstLine)    firstLine is optional
     const view1GlobalMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.monthly.csv", ",", ["time", "anomaly"]);
     const view1GlobalAnnual = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv", ",", ["time", "anomaly"]);
     const view1NorthMonthly = await saveData("https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/HadCRUT.5.0.1.0.analysis.summary_series.northern_hemisphere.monthly.csv", ",", ["time", "anomaly"]);
