@@ -17,6 +17,7 @@ handler = async (event, context, callback) => {
     const view4SampleTwo = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 58, 70);
     const view4SampleThree = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 74, 116);
     const view5Main = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2", "\t", ["iceDepthMeters", "iceAgeYearBeforePresent", "airAgeYearBeforePresent", "co2ppm"], 20)
+    const view6Main = await saveData("link", "\t", ["gasAgeYearBeforePresent", "co2ppm"], 137)
 
     const dataArray = [
         {
@@ -120,6 +121,14 @@ handler = async (event, context, callback) => {
                 Item: {
                     view_id: "view5Main",
                     info: view5Main
+                },
+            },
+        },
+        {
+            PutRequest: {
+                Item: {
+                    view_id: "view6Main",
+                    info: view6Main
                 },
             },
         },
