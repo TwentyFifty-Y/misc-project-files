@@ -16,8 +16,10 @@ handler = async (event, context, callback) => {
     const view4SampleOne = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 21, 54);
     const view4SampleTwo = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 58, 70);
     const view4SampleThree = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat", /\s{3,}/, ["sampleCode", "analysisDate", "iceDepthMeters", "iceAgeYear", "airAgeYear", "co2ppm"], 74, 116);
-    const view5Main = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2", "\t", ["iceDepthMeters", "iceAgeYearBeforePresent", "airAgeYearBeforePresent", "co2ppm"], 20)
-    const view6Main = await saveData("link", "\t", ["gasAgeYearBeforePresent", "co2ppm"], 137)
+    const view5Main = await saveData("https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2", "\t", ["iceDepthMeters", "iceAgeYearBeforePresent", "airAgeYearBeforePresent", "co2ppm"], 20);
+    const view6Main = await saveData("https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt", "\t", ["gasAgeYearBeforePresent", "co2ppm"], 137);
+    // view7Main was hardcoded to save time as the source data comes in a .zip file
+    
 
     const dataArray = [
         {
@@ -161,7 +163,7 @@ function dsvJSON(dsv, delimiter, headers, firstLine, lastLine) {
 
     var result = [];
 
-    for (var i = (firstLine + 1); i < lastLine; i++) {
+    for (var i = (firstLine + 1); i < (lastLine - 1); i++) {
 
         var obj = {};
         var currentline = lines[i].trim().split(delimiter);
