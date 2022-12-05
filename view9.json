@@ -187,21 +187,21 @@
             "globalEmissionsPercentage": 1.3
         }
     ],
-    "Sector": [
+    "sector": [
         {
-            "Sector": "Energy",
+            "sector": "Energy",
             "globalEmissionsPercentage": 73.2
         },
         {
-            "Sector": "Industrial processes",
+            "sector": "Industrial processes",
             "globalEmissionsPercentage": 5.2
         },
         {
-            "Sector": "Waste",
+            "sector": "Waste",
             "globalEmissionsPercentage": 3.2
         },
         {
-            "Sector": "Agriculture, Forestry & Land Use (AFOLU)",
+            "sector": "Agriculture, Forestry & Land Use (AFOLU)",
             "globalEmissionsPercentage": 18.4
         }
     ]
