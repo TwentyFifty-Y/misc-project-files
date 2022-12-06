@@ -1,208 +1,180 @@
 {
-    "infraSubSector": [
-        {
-            "subSector": "Road",
-            "globalEmissionsPercentage": 11.9
-        },
-        {
-            "subSector": "Aviation",
-            "globalEmissionsPercentage": 1.9
-        },
-        {
-            "subSector": "Rail",
-            "globalEmissionsPercentage": 0.4
-        },
-        {
-            "subSector": "Pipeline",
-            "globalEmissionsPercentage": 0.3
-        },
-        {
-            "subSector": "Ship",
-            "globalEmissionsPercentage": 1.7
-        },
-        {
-            "subSector": "Residential",
-            "globalEmissionsPercentage": 10.9
-        },
-        {
-            "subSector": "Commercial",
-            "globalEmissionsPercentage": 6.6
-        },
-        {
-            "subSector": "Iron & Steel",
-            "globalEmissionsPercentage": 7.2
-        },
-        {
-            "subSector": "Non-ferrous metals",
-            "globalEmissionsPercentage": 0.7
-        },
-        {
-            "subSector": "Machinery",
-            "globalEmissionsPercentage": 0.5
-        },
-        {
-            "subSector": "Food and tobacco",
-            "globalEmissionsPercentage": 1
-        },
-        {
-            "subSector": "Paper, pulp & printing",
-            "globalEmissionsPercentage": 0.6
-        },
-        {
-            "subSector": "Chemical & petrochemical (energy)",
-            "globalEmissionsPercentage": 3.6
-        },
-        {
-            "subSector": "Other industry",
-            "globalEmissionsPercentage": 10.6
-        },
-        {
-            "subSector": "Energy in Agriculture & Fishing",
-            "globalEmissionsPercentage": 1.7
-        },
-        {
-            "subSector": "Unallocated fuel combustion",
-            "globalEmissionsPercentage": 7.8
-        },
-        {
-            "subSector": "Coal",
-            "globalEmissionsPercentage": 1.9
-        },
-        {
-            "subSector": "Oil & Natural Gas",
-            "globalEmissionsPercentage": 3.9
-        },
-        {
-            "subSector": "Cement",
-            "globalEmissionsPercentage": 3
-        },
-        {
-            "subSector": "Chemical & petrochemical (industrial)",
-            "globalEmissionsPercentage": 2.2
-        },
-        {
-            "subSector": "Livestock & Manure",
-            "globalEmissionsPercentage": 5.8
-        },
-        {
-            "subSector": "Rice Cultivation",
-            "globalEmissionsPercentage": 1.3
-        },
-        {
-            "subSector": "Agricultural Soils",
-            "globalEmissionsPercentage": 4.1
-        },
-        {
-            "subSector": "Crop Burning",
-            "globalEmissionsPercentage": 3.5
-        },
-        {
-            "subSector": "Forest Land",
-            "globalEmissionsPercentage": 2.2
-        },
-        {
-            "subSector": "Cropland",
-            "globalEmissionsPercentage": 1.4
-        },
-        {
-            "subSector": "Grassland",
-            "globalEmissionsPercentage": 0.1
-        },
-        {
-            "subSector": "Landfills",
-            "globalEmissionsPercentage": 1.9
-        },
-        {
-            "subSector": "Wastewater",
-            "globalEmissionsPercentage": 1.3
-        }
-    ],
-    "subSector": [
-        {
-            "subSector": "Transport",
-            "globalEmissionsPercentage": 16.2
-        },
-        {
-            "subSector": "Energy in buildings (electricity and heat)",
-            "globalEmissionsPercentage": 17.5
-        },
-        {
-            "subSector": "Energy in industry",
-            "globalEmissionsPercentage": 24.2
-        },
-        {
-            "subSector": "Energy in Agriculture & Fishing",
-            "globalEmissionsPercentage": 1.7
-        },
-        {
-            "subSector": "Unallocated fuel combustion",
-            "globalEmissionsPercentage": 7.8
-        },
-        {
-            "subSector": "Fugitive emissions from energy",
-            "globalEmissionsPercentage": 5.8
-        },
-        {
-            "subSector": "Cement",
-            "globalEmissionsPercentage": 3
-        },
-        {
-            "subSector": "Chemical & petrochemical (industrial)",
-            "globalEmissionsPercentage": 2.2
-        },
-        {
-            "subSector": "Livestock & Manure",
-            "globalEmissionsPercentage": 5.8
-        },
-        {
-            "subSector": "Rice Cultivation",
-            "globalEmissionsPercentage": 1.3
-        },
-        {
-            "subSector": "Agricultural Soils",
-            "globalEmissionsPercentage": 4.1
-        },
-        {
-            "subSector": "Crop Burning",
-            "globalEmissionsPercentage": 3.5
-        },
-        {
-            "subSector": "Forest Land",
-            "globalEmissionsPercentage": 2.2
-        },
-        {
-            "subSector": "Cropland",
-            "globalEmissionsPercentage": 1.4
-        },
-        {
-            "subSector": "Grassland",
-            "globalEmissionsPercentage": 0.1
-        },
-        {
-            "subSector": "Landfills",
-            "globalEmissionsPercentage": 1.9
-        },
-        {
-            "subSector": "Wastewater",
-            "globalEmissionsPercentage": 1.3
-        }
-    ],
+    "infraSubSector": {
+        "transport": [
+            {
+                "subSector": "Road",
+                "globalEmissionsPercentage": 11.9
+            },
+            {
+                "subSector": "Aviation",
+                "globalEmissionsPercentage": 1.9
+            },
+            {
+                "subSector": "Rail",
+                "globalEmissionsPercentage": 0.4
+            },
+            {
+                "subSector": "Pipeline",
+                "globalEmissionsPercentage": 0.3
+            },
+            {
+                "subSector": "Ship",
+                "globalEmissionsPercentage": 1.7
+            }
+        ],
+        "usageBuildings": [
+            {
+                "subSector": "Residential",
+                "globalEmissionsPercentage": 10.9
+            },
+            {
+                "subSector": "Commercial",
+                "globalEmissionsPercentage": 6.6
+            }
+        ],
+        "usageIndustry": [
+            {
+                "subSector": "Iron & Steel",
+                "globalEmissionsPercentage": 7.2
+            },
+            {
+                "subSector": "Non-ferrous metals",
+                "globalEmissionsPercentage": 0.7
+            },
+            {
+                "subSector": "Machinery",
+                "globalEmissionsPercentage": 0.5
+            },
+            {
+                "subSector": "Food and tobacco",
+                "globalEmissionsPercentage": 1
+            },
+            {
+                "subSector": "Paper, pulp & printing",
+                "globalEmissionsPercentage": 0.6
+            },
+            {
+                "subSector": "Chemical & petrochemical (energy)",
+                "globalEmissionsPercentage": 3.6
+            },
+            {
+                "subSector": "Other industry",
+                "globalEmissionsPercentage": 10.6
+            }
+        ],
+        "fugitiveEnergy": [ 
+            {
+                "subSector": "Coal",
+                "globalEmissionsPercentage": 1.9
+            },
+            {
+                "subSector": "Oil & Natural Gas",
+                "globalEmissionsPercentage": 3.9
+            }
+        ]
+    },
+    "subSector": {
+        "energy": [
+            {
+                "subSector": "Transport",
+                "globalEmissionsPercentage": 16.2,
+                "id": "transport"
+            },
+            {
+                "subSector": "Energy in buildings (electricity and heat)",
+                "globalEmissionsPercentage": 17.5,
+                "id": "usageBuildings"
+            },
+            {
+                "subSector": "Energy in industry",
+                "globalEmissionsPercentage": 24.2,
+                "id": "usageIndustry"
+            },
+            {
+                "subSector": "Energy in Agriculture & Fishing",
+                "globalEmissionsPercentage": 1.7
+            },
+            {
+                "subSector": "Unallocated fuel combustion",
+                "globalEmissionsPercentage": 7.8
+            },
+            {
+                "subSector": "Fugitive emissions from energy",
+                "globalEmissionsPercentage": 5.8,
+                "id": "fugitiveEnergy"
+            }
+        ],
+        "industrial": [
+            {
+                "subSector": "Cement",
+                "globalEmissionsPercentage": 3
+            },
+            {
+                "subSector": "Chemical & petrochemical (industrial)",
+                "globalEmissionsPercentage": 2.2
+            }
+        ],
+        "agriculture": [
+            {
+                "subSector": "Livestock & Manure",
+                "globalEmissionsPercentage": 5.8
+            },
+            {
+                "subSector": "Rice Cultivation",
+                "globalEmissionsPercentage": 1.3
+            },
+            {
+                "subSector": "Agricultural Soils",
+                "globalEmissionsPercentage": 4.1
+            },
+            {
+                "subSector": "Crop Burning",
+                "globalEmissionsPercentage": 3.5
+            },
+            {
+                "subSector": "Forest Land",
+                "globalEmissionsPercentage": 2.2
+            },
+            {
+                "subSector": "Cropland",
+                "globalEmissionsPercentage": 1.4
+            },
+            {
+                "subSector": "Grassland",
+                "globalEmissionsPercentage": 0.1
+            }
+        ],
+        "waste": [
+            {
+                "subSector": "Landfills",
+                "globalEmissionsPercentage": 1.9
+            },
+            {
+                "subSector": "Wastewater",
+                "globalEmissionsPercentage": 1.3
+            }
+        ]
+    },
     "sector": [
         {
             "sector": "Energy",
-            "globalEmissionsPercentage": 73.2
+            "globalEmissionsPercentage": 73.2,
+            "id": "energy"
         },
         {
             "sector": "Industrial processes",
-            "globalEmissionsPercentage": 5.2
+            "globalEmissionsPercentage": 5.2,
+            "id": "industrial"
         },
         {
             "sector": "Waste",
-            "globalEmissionsPercentage": 3.2
+            "globalEmissionsPercentage": 3.2,
+            "id": "waste"
         },
         {
             "sector": "Agriculture, Forestry & Land Use (AFOLU)",
-            "globalEmissionsPercentage": 18.4
+            "globalEmissionsPercentage": 18.4,
+            "id": "agriculture"
         }
     ]
 }
